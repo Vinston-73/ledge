@@ -1,8 +1,3 @@
-
-
-
-
-
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func
 from backend.database.db import Base
 

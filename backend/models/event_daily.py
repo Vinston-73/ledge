@@ -1,13 +1,7 @@
-
-
-
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, func
 from backend.database.db import Base
 from backend.models.devicesModel import Device
 from backend.models.userModel import user
-
-
-
 class EventDaily(Base):
     __tablename__ = "event_daily"
 
