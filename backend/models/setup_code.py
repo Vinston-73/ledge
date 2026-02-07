@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, func
-from backend.database.db import Base
+from database.db import Base
 
 class Setup(Base):
     __tablename__ = "setup_code"
