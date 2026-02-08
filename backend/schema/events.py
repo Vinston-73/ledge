@@ -1,5 +1,3 @@
-
-
 from pydantic import BaseModel
 
 
@@ -21,4 +19,3 @@ class eventRead(event):
     created_at:str
     
     class Config:
-        orm_mode=True

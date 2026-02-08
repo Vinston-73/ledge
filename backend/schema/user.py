@@ -7,6 +7,7 @@ class userBase(BaseModel):
 class userCreate(userBase):
     password:str
     
+
 class userRead(userBase):
     id:int
     created_at:str

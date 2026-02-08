@@ -16,4 +16,5 @@ class SetupRead(Setup):
     expires_at:str
     is_used:bool
     user_id:int
-    
+    class Config:
+        orm_mode=True
