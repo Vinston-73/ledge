@@ -19,4 +19,4 @@ class DeviceRead(Device):
     last_used: str
     
     class Config:
-        orm_mode=True
+        from_attributes = True

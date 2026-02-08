@@ -1,15 +1,21 @@
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from auth.security import create_access_token, get_password_hashed, verify_password
 from database.db import get_db
 from models.userModel import User
 from schema.user import userCreate
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 router = APIRouter(tags=["Auth"])
+
+limiter = Limiter(key_func=get_remote_address) 
 @router.post("/register")
-def create_user(userSchema: userCreate, db: Session = Depends(get_db)):
+
+@limiter.limit("3/minute")
+def create_user(userSchema: userCreate,request: Request, db: Session = Depends(get_db)):
   
     existing_user = db.query(User).filter(User.name == userSchema.name).first()
     if existing_user:
@@ -35,7 +41,8 @@ class LoginSchema(BaseModel):
     password: str
 
 @router.post("/login")
-def login(data: LoginSchema, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def login(data: LoginSchema,request: Request, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.name == data.name).first()
     if not user or not verify_password(data.password, user.password):
         raise HTTPException(status_code=400, detail="Invalid username or password")

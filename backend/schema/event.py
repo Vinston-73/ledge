@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
-
 class event(BaseModel):
-    source: str | None = None
-    eventType: str | None = None
-    payload: str | None = None
+    source:str
+    event_type:str
+    payload:str
+
     
 class eventCreate(event):
     user_id:int
@@ -19,3 +19,4 @@ class eventRead(event):
     created_at:str
     
     class Config:
+        from_attributes = True
