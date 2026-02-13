@@ -1,19 +1,19 @@
-# Use smaller Node base image
-FROM python:3.11-slim
+# # Use smaller Node base image
+# FROM python:3.11-slim
 
-WORKDIR /app
+# WORKDIR /app
 
-# Copy only package files first (for caching)
-COPY package*.json ./
+# # Copy only package files first (for caching)
+# COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# # Install dependencies
+# RUN npm install
 
-# Copy remaining backend files
-COPY . .
+# # Copy remaining backend files
+# COPY . .
 
-# Expose backend port
-EXPOSE 4000
+# # Expose backend port
+# EXPOSE 4000
 
-# Load environment variables from .env automatically
-CMD ["npm", "start"]
+# # Load environment variables from .env automatically
+# CMD ["npm", "start"]
